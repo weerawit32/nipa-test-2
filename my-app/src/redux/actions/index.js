@@ -6,15 +6,16 @@ import {
   EDIT_TICKET,
 } from "./types";
 // import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
+// import { Dispatch } from "redux";
 
 import tickets from "../../apis/tickets";
 
-export const createTicket = async (data) => {
-  try{
-    const response = await tickets.post("/tickets", data);
-    console.log(response);
-  }catch(err){
+export const createTicket = (formValue) => async (dispatch) => {
+  try {
+    const { data } = await tickets.post("/tickets", formValue);
+    console.log(data);
+    dispatch({ type: CREATE_TICKET, payload: data });
+  } catch (err) {
     console.log(err);
   }
   // console.log(data);

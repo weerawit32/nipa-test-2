@@ -1,12 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createTicket } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import "./styles.css";
 
 export default function Form() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const aa = (state) => state.tickets;
+  const test = useSelector(aa);
+
   const {
     register,
     handleSubmit,
@@ -14,12 +17,11 @@ export default function Form() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    dispatch(createTicket(data));
-    // alert(JSON.stringify(data));
-  }; // your form submit function which will invoke after successful validation
-
-  console.log(watch("example")); // you can watch individual input by pass the name of the input
+  const onSubmit = (formValue) => {
+    dispatch(createTicket(formValue));
+    // createTicket(formValue);
+  };
+  console.log(test);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,14 +37,10 @@ export default function Form() {
       {errors?.title?.type === "maxLength" && (
         <p>First name cannot exceed 20 characters</p>
       )}
-      {errors?.title?.type === "pattern" && (
-        <p>Alphabetical characters only</p>
-      )}
+      {errors?.title?.type === "pattern" && <p>Alphabetical characters only</p>}
       <label>Body</label>
       <input {...register("body", { pattern: /^[A-Za-z]+$/i })} />
-      {errors?.body?.type === "pattern" && (
-        <p>Alphabetical characters only</p>
-      )}
+      {errors?.body?.type === "pattern" && <p>Alphabetical characters only</p>}
       {/* <label>Age</label>a
       <input {...register("age", { min: 18, max: 99 })} />
       {errors.age && (
