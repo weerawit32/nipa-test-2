@@ -18,7 +18,8 @@ export default function Form() {
   } = useForm();
 
   const onSubmit = (formValue) => {
-    dispatch(createTicket(formValue));
+    const createTicketThunk = createTicket(formValue)
+    dispatch(createTicketThunk);
     // createTicket(formValue);
   };
   console.log(test);
