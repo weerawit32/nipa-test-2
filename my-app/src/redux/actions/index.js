@@ -10,18 +10,18 @@ import {
 
 import tickets from "../../apis/tickets";
 
-// export const createTicket = (formValue) => async (dispatch) => {
-//   try {
-//     const { data } = await tickets.post("/tickets", formValue);
-//     console.log(data);
-//     dispatch({ type: CREATE_TICKET, payload: data });
-//   } catch (err) {
-//     console.log(err);
-//   }
-//   // console.log(data);
+export const createTicket = (formValue) => async (dispatch) => {
+  try {
+    const { data } = await tickets.post("/tickets", formValue);
+    console.log(data);
+    dispatch({ type: CREATE_TICKET, payload: data });
+  } catch (err) {
+    console.log(err);
+  }
+  // console.log(data);
 
-//   // dispatch({ type: CREATE_TICKET, payload: response.data });
-// };
+  // dispatch({ type: CREATE_TICKET, payload: response.data });
+};
 
 export function createTicket(formValue) {
   // And then creates and returns the async thunk function:
